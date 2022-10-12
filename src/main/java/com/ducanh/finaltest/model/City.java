@@ -11,7 +11,7 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String county;
+    private String country;
     private double area;
     private double population;
     private double GPA;
@@ -20,9 +20,9 @@ public class City {
     public City() {
     }
 
-    public City(String name, String county, double area, double population, double GPA, String description) {
+    public City(String name, String country, double area, double population, double GPA, String description) {
         this.name = name;
-        this.county = county;
+        this.country = country;
         this.area = area;
         this.population = population;
         this.GPA = GPA;
@@ -45,12 +45,12 @@ public class City {
         this.name = name;
     }
 
-    public String getCounty() {
-        return county;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCounty(String county) {
-        this.county = county;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public double getArea() {

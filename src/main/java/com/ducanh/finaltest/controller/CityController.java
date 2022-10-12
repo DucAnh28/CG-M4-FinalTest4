@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api-city")
+@CrossOrigin("*")
 public class CityController {
     @Autowired
     private ICityService cityService;
@@ -18,6 +19,14 @@ public class CityController {
     @GetMapping()
     public ResponseEntity<Iterable<City>> showAllCity() {
         return new ResponseEntity<>(cityService.findAll(), HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<City> showCityById(@PathVariable Long id) {
+        Optional<City> cOptional = cityService.findById(id);
+        if (!cOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(cOptional.get(), HttpStatus.OK);
     }
 
     @PostMapping()
@@ -27,7 +36,7 @@ public class CityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<City> editCity(@PathVariable Long id, @ModelAttribute City city) {
+    public ResponseEntity<City> editCity(@PathVariable Long id, @RequestBody City city) {
         Optional<City> optionalCity = cityService.findById(id);
         if (!optionalCity.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
